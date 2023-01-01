@@ -32,6 +32,13 @@ html {
   color: #615551;
 }
 
+.ml-2 {
+  margin-left: 5px;
+}
+.mr-2 {
+  margin-right: 5px;
+}
+
 .link-active {
   text-decoration: none;
   color: black;
@@ -203,4 +210,10 @@ body {
 }
 .detail--desc h2 {
   font-size: 25px;
+}
+.detail--cooking {
+  margin-top: 20px;
+}
+.btn-4 {
+  margin: 30px auto;
 }

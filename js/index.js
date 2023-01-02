@@ -7,8 +7,9 @@ const displaySection = document.querySelector(".display--Section");
 const searchButton = document.querySelector(".search--Button");
 const viewDetails = document.querySelector(".btn-2");
 const addToFav = document.querySelector(".btn-3");
-
+let currentUrl = "http://127.0.0.1:5500/";
 let markUp = ``;
+
 searchValue[0].addEventListener("input", function (params) {
   //alert(searchValue[0].value);
   //console.log(params);
@@ -51,12 +52,15 @@ const showDataById = async function (Id) {
   console.log(res);
   let data = await res.json();
   console.log(data.meals[0]);
-  renderOneList(data.meals[0]);
+  renderOneList(data.meals[0], 1);
 };
 
-const renderOneList = async function (data) {
+const renderOneList = async function (data, page) {
   clearData();
-  console.log("Line 54", data);
+  let button = `<button class="btn-3" data-id="${data.idMeal}">Add to Favorite</button>`;
+  if (localStorage.getItem(data.idMeal)) {
+    button = `<button class="btn-4" data-id="${data.idMeal}">Remove from Favorite</button>`;
+  }
   markUp += `<div class="display--section--list">
   <div>
     <img src="${data.strMealThumb}/preview" width="86%"/>
@@ -66,8 +70,8 @@ const renderOneList = async function (data) {
    Category: ${data.strCategory} <br /> Country : ${data.strArea} <br /> Tags : ${data.strTags}   
   </div>
   <div class="list--button--details">
-    <button class="btn-2">View details</button><br />
-    <button class="btn-3">Add to Favorite</button>
+  <button class="btn-2" data-id="${data.idMeal}">View details</button><br />
+    ${button}
   </div>  
     </div>`;
 
@@ -82,6 +86,10 @@ searchButton.addEventListener("click", function (e) {
 const renderFormSearchResults = async function (data) {
   clearData();
   for (let i = 0; i < data.length; i++) {
+    let button = `<button class="btn-3" data-id="${data[i].idMeal}">Add to Favorite</button>`;
+    if (localStorage.getItem(data[i].idMeal)) {
+      button = `<button class="btn-4" data-id="${data[i].idMeal}">Remove from Favorite</button>`;
+    }
     markUp += `<div class="display--section--list">
     <div>
       <img src="${data[i].strMealThumb}/preview" width="86%"/>
@@ -92,7 +100,7 @@ const renderFormSearchResults = async function (data) {
     </div>
     <div class="list--button--details">
       <button class="btn-2" data-id="${data[i].idMeal}">View details</button><br />
-      <button class="btn-3" data-id="${data[i].idMeal}">Add to Favorite</button>
+      ${button}
     </div>  
       </div>`;
   }
@@ -112,25 +120,29 @@ const fetchDataForList = async function (parameter) {
 };
 
 displaySection.addEventListener("click", function (event) {
-  let currentUrl = window.location.href;
-
   let button = event.target;
   let dataAttribute = button.dataset.id;
   if (event.target.className == "btn-3") {
     if (dataAttribute != undefined) {
       localStorage.setItem(dataAttribute, dataAttribute);
       alert("Successfully added to favorite");
+      location.reload(false);
+      window.location.href = currentUrl;
     }
   } else if (event.target.className == "btn-2") {
     let newUrl = currentUrl + "viewDetails.html#" + dataAttribute;
     console.log(newUrl);
     window.location.href = newUrl;
+  } else if (event.target.className == "btn-4") {
+    localStorage.removeItem(dataAttribute);
+    alert("Removed item from favorites");
+    window.location.href = currentUrl;
   } else {
     console.log("No button");
   }
 });
 
-const addToFavorite = async function () {};
+window;
 
 window.addEventListener("hashchange", function () {
   var url = window.location.href; // get the full URL

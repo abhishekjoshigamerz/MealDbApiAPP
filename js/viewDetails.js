@@ -8,7 +8,7 @@ const searchButton = document.querySelector(".search--Button");
 const viewDetails = document.querySelector(".btn-2");
 const addToFav = document.querySelector(".btn-3");
 let markUp = "";
-
+let isFavorite = false;
 const getData = async function (id) {
   let res = await fetch(`${url}lookup.php?i=${id}`);
   let data = await res.json();
@@ -38,6 +38,7 @@ function renderResultWithDetails(data) {
 
   let button = `<button class="btn-4" data-id="${data.idMeal}">Add to Favorite</button>`;
   if (localStorage.getItem(data.idMeal)) {
+    isFavorite = true;
     button = `<button class="btn-4" data-id="${data.idMeal}">Remove From Favorites</button>`;
   }
 
@@ -70,4 +71,22 @@ window.addEventListener("load", function () {
   let url = window.location.href;
   let id = url.split("#")[1];
   getData(id);
+});
+
+displaySection.addEventListener("click", function (event) {
+  let button = event.target;
+  let dataAttribute = button.dataset.id;
+  if (isFavorite) {
+    if (dataAttribute != undefined && event.target.className == "btn-4") {
+      localStorage.removeItem(dataAttribute);
+      location.reload(false);
+      alert("Successfully removed from favorite");
+    }
+  } else {
+    if (dataAttribute != undefined && event.target.className == "btn-4") {
+      localStorage.setItem(dataAttribute, dataAttribute);
+      location.reload(false);
+      alert("Successfully added to favorite");
+    }
+  }
 });

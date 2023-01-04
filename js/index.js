@@ -79,7 +79,7 @@ const renderOneList = async function (data) {
    Category: ${data.strCategory} <br /> Country : ${data.strArea} <br /> Tags : ${data.strTags}   
   </div>
   <div class="list--button--details">
-  <button class="btn-2" data-id="${data.idMeal}">View details</button><br />
+  <a class="btn-2-link" href="viewDetails.html#${data.idMeal}" data-id="${data.idMeal}">View details</a><br />
     ${button}
   </div>  
     </div>`;
@@ -110,7 +110,7 @@ const renderFormSearchResults = async function (data) {
      Category: ${data[i].strCategory} <br /> Country : ${data[i].strArea} <br /> Tags : ${data[i].strTags}   
     </div>
     <div class="list--button--details">
-      <button class="btn-2" data-id="${data[i].idMeal}">View details</button><br />
+      <a class="btn-2" data-id="${data[i].idMeal}">View details</a><br />
       ${button}
     </div>  
       </div>`;
@@ -143,10 +143,6 @@ displaySection.addEventListener("click", function (event) {
       location.reload(false);
       window.location.href = url;
     }
-  } else if (event.target.className == "btn-2") {
-    let newUrl = "viewDetails.html#" + dataAttribute;
-
-    window.location.replace(newUrl);
   } else if (event.target.className == "btn-4") {
     localStorage.removeItem(dataAttribute);
     alert("Removed item from favorites");

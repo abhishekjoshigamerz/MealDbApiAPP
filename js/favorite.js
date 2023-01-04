@@ -80,7 +80,7 @@ displaySection.addEventListener("click", function (event) {
     }
   } else if (event.target.className == "btn-2") {
     let newUrl = url + "viewDetails.html#" + dataAttribute;
-    console.log(newUrl);
+
     window.location.href = newUrl;
   } else {
     console.log("Hitting other place");

@@ -148,7 +148,8 @@ body {
   margin-right: 20px;
 }
 
-.btn-2 {
+.btn-2,
+.btn-2-link {
   background: rgb(96, 9, 240);
   background: linear-gradient(
     0deg,
@@ -159,6 +160,9 @@ body {
   height: 45px;
   color: white;
   text-align: center;
+}
+.btn-2-link {
+  margin-top: 10px;
 }
 
 .btn-3,

@@ -110,7 +110,7 @@ const renderFormSearchResults = async function (data) {
      Category: ${data[i].strCategory} <br /> Country : ${data[i].strArea} <br /> Tags : ${data[i].strTags}   
     </div>
     <div class="list--button--details">
-      <a class="btn-2-link"  href="viewDetails.html#${data.idMeal}" data-id="${data[i].idMeal}">View details</a><br />
+      <a class="btn-2-link"  href="viewDetails.html#${data[i].idMeal}" data-id="${data[i].idMeal}">View details</a><br />
       ${button}
     </div>  
       </div>`;

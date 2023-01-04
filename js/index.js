@@ -141,7 +141,7 @@ displaySection.addEventListener("click", function (event) {
       alert("Successfully added to favorite");
 
       location.reload(false);
-      window.location.href = currentUrl;
+      window.location.href = url;
     }
   } else if (event.target.className == "btn-2") {
     let newUrl = url + "viewDetails.html#" + dataAttribute;

@@ -7,7 +7,7 @@ const a = document.querySelector("link");
 const searchFormParentDiv = document.querySelector(".search");
 const displaySection = document.querySelector(".display--Section");
 const searchButton = document.querySelector(".search--Button");
-const viewDetails = document.querySelector(".btn-2");
+const viewDetails = document.querySelector(".btn-2-link");
 const addToFav = document.querySelector(".btn-3");
 
 let markUp = ``;
@@ -79,7 +79,7 @@ const renderOneList = async function (data) {
    Category: ${data.strCategory} <br /> Country : ${data.strArea} <br /> Tags : ${data.strTags}   
   </div>
   <div class="list--button--details">
-  <a class="btn-2-link" href="viewDetails.html#${data.idMeal}" data-id="${data.idMeal}">View details</a><br />
+  <a class="btn-2-link-link" href="viewDetails.html#${data.idMeal}" data-id="${data.idMeal}">View details</a><br />
     ${button}
   </div>  
     </div>`;
@@ -110,7 +110,7 @@ const renderFormSearchResults = async function (data) {
      Category: ${data[i].strCategory} <br /> Country : ${data[i].strArea} <br /> Tags : ${data[i].strTags}   
     </div>
     <div class="list--button--details">
-      <a class="btn-2" data-id="${data[i].idMeal}">View details</a><br />
+      <a class="btn-2-link" data-id="${data[i].idMeal}">View details</a><br />
       ${button}
     </div>  
       </div>`;

@@ -79,7 +79,7 @@ const renderOneList = async function (data) {
    Category: ${data.strCategory} <br /> Country : ${data.strArea} <br /> Tags : ${data.strTags}   
   </div>
   <div class="list--button--details">
-  <a class="btn-2-link-link" href="viewDetails.html#${data.idMeal}" data-id="${data.idMeal}">View details</a><br />
+  <a class="btn-2-link" href="viewDetails.html#${data.idMeal}" data-id="${data.idMeal}">View details</a><br />
     ${button}
   </div>  
     </div>`;

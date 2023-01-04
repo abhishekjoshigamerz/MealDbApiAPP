@@ -10,7 +10,6 @@ const searchButton = document.querySelector(".search--Button");
 const viewDetails = document.querySelector(".btn-2");
 const addToFav = document.querySelector(".btn-3");
 
-let currentUrl = "http://127.0.0.1:5500/";
 let markUp = ``;
 
 //detects changes in input field
@@ -135,6 +134,7 @@ const fetchDataForList = async function (parameter) {
 displaySection.addEventListener("click", function (event) {
   let button = event.target;
   let dataAttribute = button.dataset.id;
+  let url = window.location.href;
   if (event.target.className == "btn-3") {
     if (dataAttribute != undefined) {
       localStorage.setItem(dataAttribute, dataAttribute);
@@ -144,13 +144,13 @@ displaySection.addEventListener("click", function (event) {
       window.location.href = currentUrl;
     }
   } else if (event.target.className == "btn-2") {
-    let newUrl = currentUrl + "viewDetails.html#" + dataAttribute;
+    let newUrl = url + "viewDetails.html#" + dataAttribute;
 
     window.location.href = newUrl;
   } else if (event.target.className == "btn-4") {
     localStorage.removeItem(dataAttribute);
     alert("Removed item from favorites");
-    window.location.href = currentUrl;
+    window.location.href = url;
   } else {
     console.log("No button");
   }

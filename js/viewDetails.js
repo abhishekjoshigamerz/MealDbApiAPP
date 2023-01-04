@@ -1,3 +1,4 @@
+//all contants and variables
 const url = "https://themealdb.com/api/json/v1/1/";
 const searchValue = document.getElementsByClassName("searchtext--Box");
 const ul = document.querySelector(".searchResults--suggestions");
@@ -9,6 +10,14 @@ const viewDetails = document.querySelector(".btn-2");
 const addToFav = document.querySelector(".btn-3");
 let markUp = "";
 let isFavorite = false;
+//runs when page is loaded
+window.addEventListener("load", function () {
+  let url = window.location.href;
+  let id = url.split("#")[1];
+  getData(id);
+});
+
+//fetches data on the basis of id.
 const getData = async function (id) {
   let res = await fetch(`${url}lookup.php?i=${id}`);
   let data = await res.json();
@@ -16,12 +25,11 @@ const getData = async function (id) {
   renderResultWithDetails(data.meals[0]);
 };
 
+//shows/renders data in html page
 function renderResultWithDetails(data) {
   let ingredients = {};
 
   for (let i = 1; i < 21; i++) {
-    // let dd = `strIngrednts${i}`;
-    // console.log(data.dd);
     const key = `strIngredient${i}`;
     const key2 = `strMeasure${i}`;
     const value = data[key];
@@ -30,7 +38,7 @@ function renderResultWithDetails(data) {
       ingredients[value] = valueMeasure;
     }
   }
-  console.log(ingredients);
+
   let html = "";
   for (const key in ingredients) {
     html += `<p>${key} : ${ingredients[key]}</p>`;
@@ -67,12 +75,7 @@ function renderResultWithDetails(data) {
   displaySection.insertAdjacentHTML("beforeend", markUp);
 }
 
-window.addEventListener("load", function () {
-  let url = window.location.href;
-  let id = url.split("#")[1];
-  getData(id);
-});
-
+//displays section here detects which button has been clicked
 displaySection.addEventListener("click", function (event) {
   let button = event.target;
   let dataAttribute = button.dataset.id;

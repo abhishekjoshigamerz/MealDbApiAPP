@@ -1,3 +1,4 @@
+//all consts and variables here
 const url = "https://themealdb.com/api/json/v1/1/";
 const searchValue = document.getElementsByClassName("searchtext--Box");
 const ul = document.querySelector(".searchResults--suggestions");
@@ -8,6 +9,23 @@ const searchButton = document.querySelector(".search--Button");
 const viewDetails = document.querySelector(".btn-2");
 const addToFav = document.querySelector(".btn-3");
 let markUp = "";
+
+//runs on page load. fetches data from the localstorage
+window.addEventListener("load", function () {
+  let ll = Object.keys(localStorage);
+  if (ll == "") {
+    displaySection.innerHTML =
+      "No favorite added yet. Go to home page and search for some recipe and add them to favorite";
+    displaySection.style.textAlign = "center";
+  }
+  for (let i = 0; i < localStorage.length; i++) {
+    let key = localStorage.key(i);
+    let value = localStorage.getItem(key);
+    fetchDataForList(value);
+  }
+});
+
+//fetches data from one list
 const fetchDataForList = async function (parameter) {
   if (parameter != "") {
     let res = await fetch(`${url}lookup.php?i=${parameter}`);
@@ -19,6 +37,7 @@ const fetchDataForList = async function (parameter) {
   }
 };
 
+//renders form search results
 const renderFormSearchResults = async function (data) {
   markUp = `<div class="display--section--list">
     <div>
@@ -37,26 +56,14 @@ const renderFormSearchResults = async function (data) {
   displaySection.insertAdjacentHTML("beforeend", markUp);
 };
 
+//clears dom data whenever data
 function clearData() {
   markUp = "";
-  //   ul.innerHTML = "";
+
   displaySection.innerHTML = "";
 }
 
-window.addEventListener("load", function () {
-  let ll = Object.keys(localStorage);
-  if (ll == "") {
-    displaySection.innerHTML =
-      "No favorite added yet. Go to home page and search for some recipe and add them to favorite";
-    displaySection.style.textAlign = "center";
-  }
-  for (let i = 0; i < localStorage.length; i++) {
-    let key = localStorage.key(i);
-    let value = localStorage.getItem(key);
-    fetchDataForList(value);
-  }
-});
-
+//detects button click when clicked
 displaySection.addEventListener("click", function (event) {
   console.log("Click event listener called");
   let currentUrl = window.location.href;

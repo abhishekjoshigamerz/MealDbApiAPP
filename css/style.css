@@ -162,7 +162,8 @@ body {
   text-align: center;
 }
 .btn-2-link {
-  margin-top: 10px;
+  padding-top: 6px;
+  text-decoration: none;
 }
 
 .btn-3,

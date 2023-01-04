@@ -144,9 +144,9 @@ displaySection.addEventListener("click", function (event) {
       window.location.href = url;
     }
   } else if (event.target.className == "btn-2") {
-    let newUrl = url + "viewDetails.html#" + dataAttribute;
+    let newUrl = "viewDetails.html#" + dataAttribute;
 
-    window.location.href = newUrl;
+    window.location.replace(newUrl);
   } else if (event.target.className == "btn-4") {
     localStorage.removeItem(dataAttribute);
     alert("Removed item from favorites");
